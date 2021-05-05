@@ -29,7 +29,30 @@ models:
         tests:
           - unique
           - not_null
-      - name: status
+      - name: order_status
         tests:
           - accepted_values:
               values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+
+  - name: stg_payments
+    description: Cleans up payments data
+    columns:
+      - name: payment_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        tests:
+          - not_null
+
+  - name: orders
+    descriptions: Brings together orders with their payment information
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+      - name: order_id
+        tests:
+          - unique
+          - not_null
